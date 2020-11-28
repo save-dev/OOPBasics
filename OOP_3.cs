@@ -10,7 +10,7 @@ namespace COOP
             Point p1 = new Point(1, 2);
             Point p2 = new Point(6, -1);
             Point p3 = new Point(0, 33);
-            Point p4 = new Point(0, 33);
+            Point p4 = new Point(0, 41);
             new Figure(p1, p2, p3, p4);
         }
     }
@@ -33,28 +33,19 @@ namespace COOP
     {
         public Figure(params Point[] points)
         {
-            switch (points.Length)
-            {
-                case 3:
-                    Console.WriteLine("Данная фигура - треугольник");
-                    PerimeterCalculator(points[0], points[1], points[2]);
-                    break;
-                case 4:
-                    Console.WriteLine("Данная фигура - четырехугольник");
-                    PerimeterCalculator(points[0], points[1], points[2], points[3]);
-                    break;
-                case 5:
-                    Console.WriteLine("Данная фигура - пятиугольник");
-                    PerimeterCalculator(points[0], points[1], points[2], points[3], points[4]);
-                    break;
-                default:
-                    throw new ArgumentException("There is no such a polygon, too few points");
-            }
+            PerimeterCalculator(points);
+            showName(points);
         }
 
         private double LengthSide(Point a, Point b)
         {
             return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+        }
+
+        private void showName(params Point[] point)
+        {
+            string[] names = {"треугольник", "четырехугольник", "пятиугольник"};
+            Console.WriteLine($"Данная фигура - {names[point.Length - 3]}");
         }
 
         private void PerimeterCalculator(params Point[] points)

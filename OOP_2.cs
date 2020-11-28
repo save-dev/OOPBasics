@@ -6,14 +6,9 @@ namespace COOP
     {
         public void Fill(string title, string author, string content)
         {
-            Title newTitle = new Title {BookTitle = title};
-            Author newAuthor = new Author {AuthorName = author};
-            Content newContent = new Content {BookContent = content};
-
-            // TODO: Не смог разделить Fill и эти Show, попробую на досуге
-            newTitle.Show();
-            newAuthor.Show();
-            newContent.Show();
+            (new Title {BookTitle = title}).Show();
+            (new Author {AuthorName = author}).Show();
+            (new Content {BookContent = content}).Show();
         }
     }
 
@@ -57,8 +52,7 @@ namespace COOP
     {
         public static void Main(string[] args)
         {
-            Book book = new Book();
-            book.Fill("Война и мир", "Лев Толстой", "Содержание тут");
+            new Book().Fill("Война и мир", "Лев Толстой", "Содержание тут");
         }
     }
 }
@@ -69,6 +63,4 @@ namespace COOP
 Реализуйте возможность добавления в книгу названия книги, имени автора и содержания.
 Выведите на экран разными цветами при помощи метода Show() название книги, имя автора и
 содержание.
-
-TODO: например метод AddTitle  или public void Fill(Title title, Author author, Content content) { }
 */
