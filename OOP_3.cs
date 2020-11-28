@@ -47,6 +47,8 @@ namespace COOP
                     Console.WriteLine("Данная фигура - пятиугольник");
                     PerimeterCalculator(points[0], points[1], points[2], points[3], points[4]);
                     break;
+                default:
+                    throw new ArgumentException("There is no such a polygon, too few points");
             }
         }
 
