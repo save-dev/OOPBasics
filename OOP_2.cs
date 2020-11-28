@@ -2,18 +2,22 @@
 
 namespace COOP
 {
-    class Book
+    internal class Book
     {
-        // Параметрический конструктор класса
-        public Book(string title, string author, string content)
+        public void Fill(string title, string author, string content)
         {
-            new Title {BookTitle = title}.Show();
-            new Author {AuthorName = author}.Show();
-            new Content{BookContent = content}.Show();
+            Title newTitle = new Title {BookTitle = title};
+            Author newAuthor = new Author {AuthorName = author};
+            Content newContent = new Content {BookContent = content};
+
+            // TODO: Не смог разделить Fill и эти Show, попробую на досуге
+            newTitle.Show();
+            newAuthor.Show();
+            newContent.Show();
         }
     }
 
-    class Title
+    internal class Title
     {
         public string BookTitle;
 
@@ -25,7 +29,7 @@ namespace COOP
         }
     }
 
-    class Author
+    internal class Author
     {
         public string AuthorName;
 
@@ -37,7 +41,7 @@ namespace COOP
         }
     }
 
-    class Content
+    internal class Content
     {
         public string BookContent;
 
@@ -49,11 +53,12 @@ namespace COOP
         }
     }
 
-    class Program
+    internal class Program
     {
         public static void Main(string[] args)
         {
-            new Book("Война и мир", "Лев Толстой", "Здесь будет содержание книги");
+            Book book = new Book();
+            book.Fill("Война и мир", "Лев Толстой", "Содержание тут");
         }
     }
 }
@@ -64,4 +69,6 @@ namespace COOP
 Реализуйте возможность добавления в книгу названия книги, имени автора и содержания.
 Выведите на экран разными цветами при помощи метода Show() название книги, имя автора и
 содержание.
+
+TODO: например метод AddTitle  или public void Fill(Title title, Author author, Content content) { }
 */

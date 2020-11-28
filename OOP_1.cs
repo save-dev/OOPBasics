@@ -2,11 +2,11 @@
 
 namespace COOP
 {
-    class Rectangle
+    internal class Rectangle
     {
         // Поля класса
-        private double _side1;
-        private double _side2;
+        private readonly double _side1;
+        private readonly double _side2;
 
         // Конструктор
         public Rectangle(double side1, double side2)
@@ -16,12 +16,12 @@ namespace COOP
         }
 
         // Свойства: площадь и периметр, только get
-        double Area
+        private double Area
         {
             get { return AreaCalculator(_side1, _side2); }
         }
 
-        double Perimeter
+        private double Perimeter
         {
             get { return PerimeterCalculator(_side1, _side2); }
         }
@@ -48,7 +48,11 @@ namespace COOP
     {
         public static void Main(string[] args)
         {
-            new Rectangle(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine())).Show();
+            var side1 = Convert.ToDouble(Console.ReadLine());
+            var side2 = Convert.ToDouble(Console.ReadLine());
+
+            var rectangle = new Rectangle(side1, side2);
+            rectangle.Show();
         }
     }
 }

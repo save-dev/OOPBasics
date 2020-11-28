@@ -2,7 +2,7 @@
 
 namespace COOP
 {
-    static class Program
+    internal class Program
     {
         public static void Main(string[] args)
         {
@@ -10,12 +10,13 @@ namespace COOP
             Point p1 = new Point(1, 2);
             Point p2 = new Point(6, -1);
             Point p3 = new Point(0, 33);
-            new Figure(p1, p2, p3);
+            Point p4 = new Point(0, 33);
+            new Figure(p1, p2, p3, p4);
         }
     }
 
     // координата точки
-    class Point
+    internal class Point
     {
         public Point(int x, int y)
         {
@@ -28,32 +29,33 @@ namespace COOP
     }
 
     // многоугольник
-    class Figure
+    internal class Figure
     {
-        public Figure(Point p1, Point p2, Point p3)
+        public Figure(params Point[] points)
         {
-            Console.WriteLine("Данная фигура - треугольник");
-            PerimeterCalculator(p1, p2, p3);
+            switch (points.Length)
+            {
+                case 3:
+                    Console.WriteLine("Данная фигура - треугольник");
+                    PerimeterCalculator(points[0], points[1], points[2]);
+                    break;
+                case 4:
+                    Console.WriteLine("Данная фигура - четырехугольник");
+                    PerimeterCalculator(points[0], points[1], points[2], points[3]);
+                    break;
+                case 5:
+                    Console.WriteLine("Данная фигура - пятиугольник");
+                    PerimeterCalculator(points[0], points[1], points[2], points[3], points[4]);
+                    break;
+            }
         }
 
-        public Figure(Point p1, Point p2, Point p3, Point p4)
-        {
-            Console.WriteLine("Данная фигура - четырехугольник");
-            PerimeterCalculator(p1, p2, p3, p4);
-        }
-
-        public Figure(Point p1, Point p2, Point p3, Point p4, Point p5)
-        {
-            Console.WriteLine("Данная фигура - пятиугольник");
-            PerimeterCalculator(p1, p2, p3, p4, p5);
-        }
-
-        private static double LengthSide(Point a, Point b)
+        private double LengthSide(Point a, Point b)
         {
             return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
         }
 
-        private static void PerimeterCalculator(params Point[] points)
+        private void PerimeterCalculator(params Point[] points)
         {
             double perimeter = 0;
             for (var i = 0; i < points.Length - 1; i++)
