@@ -2,57 +2,54 @@
 
 namespace COOP
 {
-    internal class Book
+    class Book
     {
         // Параметрический конструктор класса
         public Book(string title, string author, string content)
         {
-            Title newTitle = new Title {BookTitle = title};
-            newTitle.Show(title);
-            Author newAuthor = new Author {AuthorName = author};
-            newAuthor.Show(author);
-            Content newContent = new Content{BookContent = content};
-            newContent.Show(content);
+            new Title {BookTitle = title}.Show();
+            new Author {AuthorName = author}.Show();
+            new Content{BookContent = content}.Show();
         }
     }
 
-    public class Title
+    class Title
     {
         public string BookTitle;
 
-        public void Show(string str)
+        public void Show()
         {
             Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine($"Название книги: `{str}`");
+            Console.WriteLine($"Название книги: `{BookTitle}`");
             Console.ResetColor();
         }
     }
 
-    public class Author
+    class Author
     {
         public string AuthorName;
 
-        public void Show(string str)
+        public void Show()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($"Автор: `{str}`");
+            Console.WriteLine($"Автор: `{AuthorName}`");
             Console.ResetColor();
         }
     }
 
-    public class Content
+    class Content
     {
         public string BookContent;
 
-        public void Show(string str)
+        public void Show()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Содержание книги: `{str}`");
+            Console.WriteLine($"Содержание книги: `{BookContent}`");
             Console.ResetColor();
         }
     }
 
-    internal class Program
+    class Program
     {
         public static void Main(string[] args)
         {

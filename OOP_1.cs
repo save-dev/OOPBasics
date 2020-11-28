@@ -2,11 +2,11 @@
 
 namespace COOP
 {
-    internal class Rectangle
+    class Rectangle
     {
         // Поля класса
-        private readonly double _side1;
-        private readonly double _side2;
+        private double _side1;
+        private double _side2;
 
         // Конструктор
         public Rectangle(double side1, double side2)
@@ -15,16 +15,16 @@ namespace COOP
             _side2 = side2;
         }
 
-        // Метод вывода
-        public void Output()
+        // Свойства: площадь и периметр, только get
+        double Area
         {
-            Console.WriteLine(Area);
-            Console.WriteLine(Perimeter);
+            get { return AreaCalculator(_side1, _side2); }
         }
 
-        // Свойства: площадь и периметр, только get
-        private double Area => AreaCalculator(_side1, _side2);
-        private double Perimeter => PerimeterCalculator(_side1, _side2);
+        double Perimeter
+        {
+            get { return PerimeterCalculator(_side1, _side2); }
+        }
 
         // Приватные методы расчета площади и периметра
         private static double AreaCalculator(double a, double b)
@@ -36,14 +36,19 @@ namespace COOP
         {
             return 2 * (a + b);
         }
+
+        public void Show()
+        {
+            Console.WriteLine($"Площадь прямоугольника:  {Area}");
+            Console.WriteLine($"Периметр прямоугольника: {Perimeter}");
+        }
     }
 
-    internal static class Program
+    class Program
     {
         public static void Main(string[] args)
         {
-            var rec = new Rectangle(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
-            rec.Output();
+            new Rectangle(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine())).Show();
         }
     }
 }
