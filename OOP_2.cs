@@ -9,7 +9,7 @@ namespace COOP
         {
             new Title {BookTitle = title}.Show();
             new Author {AuthorName = author}.Show();
-            new Content{BookContent = content}.Show();
+            new Content {BookContent = content}.Show();
         }
     }
 
