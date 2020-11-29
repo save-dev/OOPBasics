@@ -7,6 +7,7 @@ namespace COOP
     {
         private readonly double usd, eur, rub;
 
+        // Possible misleading values' names: these are exchange rates
         public Converter(double usd, double eur, double rub)
         {
             this.usd = usd;
