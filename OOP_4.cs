@@ -5,26 +5,28 @@ namespace COOP
 {
     internal class Converter
     {
-        private readonly double usd, eur, rub;
+        private double Usd { get; }
+        private double Eur { get; }
+        private double Rub { get; }
 
         // Possible misleading values' names: these are exchange rates
         public Converter(double usd, double eur, double rub)
         {
-            this.usd = usd;
-            this.eur = eur;
-            this.rub = rub;
+            Usd = usd;
+            Eur = eur;
+            Rub = rub;
         }
 
         public void Convert(double qty, string from, string to)
         {
             Dictionary<string, double> conversionData = new Dictionary<string, double>()
             {
-                {"usd uah", usd * qty},
-                {"eur uah", eur * qty},
-                {"rub uah", rub * qty},
-                {"uah usd", qty / usd},
-                {"uah eur", qty / eur},
-                {"uah rub", qty / rub},
+                {"usd uah", Usd * qty},
+                {"eur uah", Eur * qty},
+                {"rub uah", Rub * qty},
+                {"uah usd", qty / Usd},
+                {"uah eur", qty / Eur},
+                {"uah rub", qty / Rub},
             };
 
             Console.Write($"Currency exchange from {from} to {to}: ");

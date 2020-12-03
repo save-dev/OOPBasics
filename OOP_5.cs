@@ -6,15 +6,14 @@ namespace COOP
     internal class Employee
     {
         private const double BaseRate = 2000, TaxRate = .2;
+        public string Name { get; }
+        public string Surname { get; }
 
         public Employee(string name, string surname)
         {
             Name = name;
             Surname = surname;
         }
-
-        public string Name { get; }
-        public string Surname { get; }
 
         private double Staffing(string position)
         {
