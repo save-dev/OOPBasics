@@ -18,10 +18,12 @@ namespace COOP
     {
         public static void Print(this Vehicle vehicle)
         {
-            foreach (var field in vehicle.GetType()
-                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
+            foreach (var field in vehicle.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic |
+                                                              BindingFlags.Public | BindingFlags.FlattenHierarchy))
             {
-                Console.WriteLine(field.GetValue(vehicle));
+                // Bug: Only inherited fields being printed
+                // Bug: Private names printed
+                Console.WriteLine($"{field.Name}: {field.GetValue(vehicle)}");
             }
         }
     }
@@ -92,8 +94,6 @@ namespace COOP
         }
     }
 }
-
-// TODO: output name and full fields
 
 /*
 Создать класс Vehicle.
