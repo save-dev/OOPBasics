@@ -10,14 +10,26 @@ namespace COOP
             Vehicle boeing = new Plane(-11, 3, 3000000, 800, 1981, 12, 120);
             Vehicle mazda = new Car(5, 2, 18520, 90, 1995);
             Vehicle titanic = new Ship(5, 16, 1450000000, 75, 1895, 2000, "Odessa");
-            boeing.Output(boeing); // Бред
+            boeing.Print();
         }
     }
 
-    internal class Vehicle
+    public static class Output
     {
-        private double _coordX, _coordY;
-        private double _price, _speed;
+        public static void Print(this Vehicle vehicle)
+        {
+            foreach (var field in vehicle.GetType()
+                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
+            {
+                Console.WriteLine(field.GetValue(vehicle));
+            }
+        }
+    }
+
+    public class Vehicle
+    {
+        private readonly double _coordX, _coordY;
+        private readonly double _price, _speed;
         private int _year;
 
         protected Vehicle(double coordX, double coordY, double price, double speed, int year)
@@ -28,18 +40,12 @@ namespace COOP
             _coordX = coordX;
             _coordY = coordY;
         }
-
-        public void Output(Vehicle vehicle)
-        {
-            foreach (var field in vehicle.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic))
-                Console.WriteLine(field.GetValue(vehicle));
-        }
     }
 
     internal class Plane : Vehicle
     {
-        private double Height { get; }
-        private int PassengersQty { get; }
+        private readonly double _height;
+        private readonly int _passengersQty;
 
         public Plane(double coordX,
             double coordY,
@@ -50,8 +56,8 @@ namespace COOP
             int passengersQty) :
             base(coordX, coordY, price, speed, year)
         {
-            Height = height;
-            PassengersQty = passengersQty;
+            _height = height;
+            _passengersQty = passengersQty;
         }
     }
 
@@ -69,8 +75,8 @@ namespace COOP
 
     internal class Ship : Vehicle
     {
-        private int PassengersQty { get; }
-        private string Seaport { get; }
+        private readonly int _passengersQty;
+        private readonly string _seaport;
 
         public Ship(double coordX,
             double coordY,
@@ -81,11 +87,13 @@ namespace COOP
             string seaport) :
             base(coordX, coordY, price, speed, year)
         {
-            PassengersQty = passengersQty;
-            Seaport = seaport;
+            _passengersQty = passengersQty;
+            _seaport = seaport;
         }
     }
 }
+
+// TODO: output name and full fields
 
 /*
 Создать класс Vehicle.
