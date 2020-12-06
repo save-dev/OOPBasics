@@ -18,36 +18,34 @@ namespace COOP
     {
         public static void Print(this Vehicle vehicle)
         {
-            foreach (var field in vehicle.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic |
-                                                              BindingFlags.Public | BindingFlags.FlattenHierarchy))
+            if (vehicle is Plane plane)
             {
-                // Bug: Only inherited fields being printed
-                // Bug: Private names printed
-                Console.WriteLine($"{field.Name}: {field.GetValue(vehicle)}");
+                Console.WriteLine(plane.Height);
+                Console.WriteLine(plane.PassengersQty);
             }
         }
     }
 
     public class Vehicle
     {
-        private readonly double _coordX, _coordY;
-        private readonly double _price, _speed;
-        private int _year;
+        public readonly double CoordX, CoordY;
+        public readonly double Price, Speed;
+        public int Year;
 
         protected Vehicle(double coordX, double coordY, double price, double speed, int year)
         {
-            _speed = speed;
-            _price = price;
-            _year = year;
-            _coordX = coordX;
-            _coordY = coordY;
+            Speed = speed;
+            Price = price;
+            Year = year;
+            CoordX = coordX;
+            CoordY = coordY;
         }
     }
 
     internal class Plane : Vehicle
     {
-        private readonly double _height;
-        private readonly int _passengersQty;
+        public readonly double Height;
+        public readonly int PassengersQty;
 
         public Plane(double coordX,
             double coordY,
@@ -58,8 +56,8 @@ namespace COOP
             int passengersQty) :
             base(coordX, coordY, price, speed, year)
         {
-            _height = height;
-            _passengersQty = passengersQty;
+            Height = height;
+            PassengersQty = passengersQty;
         }
     }
 
@@ -77,8 +75,8 @@ namespace COOP
 
     internal class Ship : Vehicle
     {
-        private readonly int _passengersQty;
-        private readonly string _seaport;
+        private readonly int PassengersQty;
+        private readonly string Seaport;
 
         public Ship(double coordX,
             double coordY,
@@ -89,8 +87,8 @@ namespace COOP
             string seaport) :
             base(coordX, coordY, price, speed, year)
         {
-            _passengersQty = passengersQty;
-            _seaport = seaport;
+            PassengersQty = passengersQty;
+            Seaport = seaport;
         }
     }
 }
