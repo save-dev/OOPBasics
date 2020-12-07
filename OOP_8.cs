@@ -22,6 +22,7 @@ namespace COOP
             {
                 Console.WriteLine(plane.Height);
                 Console.WriteLine(plane.PassengersQty);
+                // and so on
             }
         }
     }
