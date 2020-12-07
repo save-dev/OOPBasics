@@ -40,6 +40,7 @@ namespace COOP
             }
             else
             {
+                // No try-catch, just a mockup
                 throw new Exception("No such type");
             }
         }
